@@ -3,6 +3,7 @@ require 'rubocop'
 
 module RubocopRunner
   module_function
+
   # from https://github.com/djberg96/ptools/blob/master/lib/ptools.rb#L90
   def binary?(file)
     return true if File.ftype(file) != 'file'
@@ -22,6 +23,25 @@ module RubocopRunner
     end
   end
 
+  def merge?
+    File.exist?('.git/MERGE_MSG') && File.exist?('.git/MERGE_HEAD')
+  end
+
+  def conflict_files
+    IO.read('.git/MERGE_MSG')
+      .each_line
+      .select { |e| e.start_with?("\t") }
+      .map(&:strip)
+  end
+
+  def files
+    if merge?
+      conflict_files
+    else
+      staged_files
+    end
+  end
+
   RUBY_PATTERN = /\.(rb|gemspec)$/
   RUBY_NAMES = %w(Guardfile Gemfile Rakefile config.ru)
 
@@ -30,7 +50,7 @@ module RubocopRunner
   end
 
   def staged_ruby_files
-    @ruby_files ||= staged_files
+    @ruby_files ||= files
                     .reject { |e| File.directory?(e) }
                     .select { |e| ruby_file?(e) }
   end
@@ -63,10 +83,11 @@ module RubocopRunner
     pre_commit_path = git_root.join('hooks', 'pre-commit')
     create_backup(pre_commit_path)
 
-    pre_commit_template_path = RubocopRunner.root.join('lib', 'template', 'pre-commit')
+    pre_commit_template_path = RubocopRunner.root.join('lib',
+                                                       'template',
+                                                       'pre-commit')
     # $stdout.puts 'placing new pre-commit hook'
     FileUtils.cp(pre_commit_template_path, pre_commit_path)
     FileUtils.chmod('+x', pre_commit_path)
-    true
   end
 end
