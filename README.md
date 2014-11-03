@@ -1,14 +1,17 @@
 # RubocopRunner
 
-TODO: Write a gem description
+collection of helper methods to easily run rubocop as pre-commit hook
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add these lines to your application's Gemfile:
 
 ```ruby
 gem 'rubocop_runner'
+gem 'rubocop', '0.27.0'
 ```
+
+(I suggest you pin the version of rubocop to something you tested)
 
 And then execute:
 
@@ -20,11 +23,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Copy the included pre-commit hook in the correct folder (.git/hooks/) or use a
+rake task similar to this one to setup your project.
+
+``` ruby
+require 'bundler/setup'
+
+desc "initialize project"
+task :init do
+  require 'rubocop_runner'
+  RubocopRunner.install
+end
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/rubocop_runner/fork )
+1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
