@@ -2,6 +2,7 @@ require "rubocop_runner/version"
 require "rubocop"
 
 module RubocopRunner
+  extend self
   # from https://github.com/djberg96/ptools/blob/master/lib/ptools.rb#L90
   def binary?(file)
     return true if File.ftype(file) != 'file'
@@ -10,15 +11,13 @@ module RubocopRunner
   end
 
   def staged_files
-    @staged_files ||= begin
-      files = `git diff --cached --name-only --diff-filter=ACM`.split
-      files.reject do |f|
-        if File.ftype(f) != 'file'
-          true
-        else
-          size = File.size(f)
-          size > 1_000_000 || (size > 20 && binary?(f))
-        end
+    files = `git diff --cached --name-only --diff-filter=ACM`.split
+    files.reject do |f|
+      if File.ftype(f) != 'file'
+        true
+      else
+        size = File.size(f)
+        size > 1_000_000 || (size > 20 && binary?(f))
       end
     end
   end
