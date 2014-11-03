@@ -1,8 +1,7 @@
-require "rubocop_runner/version"
-require "rubocop"
+require 'rubocop_runner/version'
+require 'rubocop'
 
 module RubocopRunner
-  extend self
   # from https://github.com/djberg96/ptools/blob/master/lib/ptools.rb#L90
   def binary?(file)
     return true if File.ftype(file) != 'file'
@@ -22,18 +21,23 @@ module RubocopRunner
     end
   end
 
-  def staged_ruby_files
-    staged_files
-      .reject{ |e| File.directory?(e)}
-      .select{ |e| RUBY_NAMES.include?(e) || !!(e =~ RUBY_PATTERN) }
-      .uniq
-  end
-
   RUBY_PATTERN = /\.(rb|gemspec)$/
   RUBY_NAMES = %w(Guardfile Gemfile Rakefile config.ru)
-  DEFAULT_ARGS = %w(--auto-correct --format fuubar)
 
-  def run
-    ::RuboCop::CLI.new.run(DEFAULT_ARGS + staged_ruby_files) 
+  def ruby_file?(filename)
+    RUBY_NAMES.include?(filename) || !!(filename =~ RUBY_PATTERN)
   end
+
+  def staged_ruby_files
+    @ruby_files ||= staged_files
+                    .reject { |e| File.directory?(e) }
+                    .select { |e| ruby_file?(e) }
+  end
+
+  DEFAULT_ARGS = %w(--auto-correct --format fuubar)
+  def run
+    return 0 if staged_ruby_files.empty?
+    ::RuboCop::CLI.new.run(DEFAULT_ARGS + staged_ruby_files)
+  end
+  module_function :run
 end
