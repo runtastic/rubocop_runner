@@ -8,7 +8,7 @@ Add these lines to your application's Gemfile:
 
 ```ruby
 gem 'rubocop_runner'
-gem 'rubocop', '0.27.0'
+gem 'rubocop', '0.27.1'
 ```
 
 (I suggest you pin the version of rubocop to something you tested)
@@ -35,6 +35,9 @@ task :init do
   RubocopRunner.install
 end
 ```
+
+You can use `lib/template/rubocop.yml` as inital rubocop config by copying it
+as `.rubocop.yml` into your project.
 
 ## Contributing
 
