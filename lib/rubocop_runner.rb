@@ -50,9 +50,9 @@ module RubocopRunner
   end
 
   def staged_ruby_files
-    @ruby_files ||= files
-                    .reject { |e| File.directory?(e) }
-                    .select { |e| ruby_file?(e) }
+    @ruby_files ||= files.select do |file|
+      !File.directory?(file) && File.exist?(file) && ruby_file?(file)
+    end
   end
 
   DEFAULT_ARGS = %w(--auto-correct --format fuubar --force-exclusion)
