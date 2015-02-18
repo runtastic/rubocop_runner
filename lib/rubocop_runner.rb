@@ -55,7 +55,10 @@ module RubocopRunner
     end
   end
 
-  DEFAULT_ARGS = %w(--auto-correct --format fuubar --force-exclusion --fail-level autocorrect)
+  DEFAULT_ARGS = %w(--auto-correct
+                    --format fuubar
+                    --force-exclusion
+                    --fail-level autocorrect)
   def run
     return 0 if staged_ruby_files.empty?
     ::RuboCop::CLI.new.run(DEFAULT_ARGS + staged_ruby_files)
