@@ -7,8 +7,8 @@ collection of helper methods to easily run rubocop as pre-commit hook
 Add these lines to your application's Gemfile:
 
 ```ruby
-gem 'rubocop_runner'
 gem 'rubocop', '0.27.1'
+gem 'rubocop_runner', git: "ssh://git@git.example.com:7999/gem/rubocop_runner.git", tag: 'v_current_tag'
 ```
 
 (I suggest you pin the version of rubocop to something you tested)
