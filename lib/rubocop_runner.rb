@@ -1,20 +1,20 @@
-require 'rubocop_runner/version'
-require 'rubocop'
+require "rubocop_runner/version"
+require "rubocop"
 
 module RubocopRunner
   module_function
 
   # from https://github.com/djberg96/ptools/blob/master/lib/ptools.rb#L90
   def binary?(file)
-    return true if File.ftype(file) != 'file'
-    s = (File.read(file, File.stat(file).blksize) || '').split(//)
-    ((s.size - s.grep(' '..'~').size) / s.size.to_f) > 0.30
+    return true if File.ftype(file) != "file"
+    s = (File.read(file, File.stat(file).blksize) || "").split(//)
+    ((s.size - s.grep(" ".."~").size) / s.size.to_f) > 0.30
   end
 
   def staged_files
     files = `git diff --cached --name-only --diff-filter=ACM`.split
     files.reject do |f|
-      if File.ftype(f) != 'file'
+      if File.ftype(f) != "file"
         true
       else
         size = File.size(f)
@@ -24,11 +24,11 @@ module RubocopRunner
   end
 
   def merge?
-    File.exist?('.git/MERGE_MSG') && File.exist?('.git/MERGE_HEAD')
+    File.exist?(".git/MERGE_MSG") && File.exist?(".git/MERGE_HEAD")
   end
 
   def conflict_files
-    IO.read('.git/MERGE_MSG')
+    IO.read(".git/MERGE_MSG")
       .each_line
       .select { |e| e.start_with?("\t") }
       .map(&:strip)
@@ -65,7 +65,7 @@ module RubocopRunner
   end
 
   RUBOCOP_RUNNER_HOME =
-    Pathname.new(File.join(File.dirname(__FILE__), '..')).realpath
+    Pathname.new(File.join(File.dirname(__FILE__), "..")).realpath
 
   def root
     RUBOCOP_RUNNER_HOME
@@ -75,22 +75,22 @@ module RubocopRunner
     return unless File.exist?(pre_commit_path)
     # $stdout.puts 'moving away the old pre-commit hook -> pre-commit.bkp'
     FileUtils.mv(pre_commit_path,
-                 pre_commit_path.join('.bkp'),
+                 pre_commit_path.join(".bkp"),
                  force: true)
   end
 
-  def install(root = '.')
-    require 'fileutils'
+  def install(root = ".")
+    require "fileutils"
     git_root = Pathname.new "#{root}/.git"
     return false unless File.exist?(git_root)
-    pre_commit_path = git_root.join('hooks', 'pre-commit')
+    pre_commit_path = git_root.join("hooks", "pre-commit")
     create_backup(pre_commit_path)
 
-    pre_commit_template_path = RubocopRunner.root.join('lib',
-                                                       'template',
-                                                       'pre-commit')
+    pre_commit_template_path = RubocopRunner.root.join("lib",
+                                                       "template",
+                                                       "pre-commit")
     # $stdout.puts 'placing new pre-commit hook'
     FileUtils.cp(pre_commit_template_path, pre_commit_path)
-    FileUtils.chmod('+x', pre_commit_path)
+    FileUtils.chmod("+x", pre_commit_path)
   end
 end

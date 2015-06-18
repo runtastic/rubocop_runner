@@ -1,2 +1,2 @@
-require 'geminabox-release'
-GeminaboxRelease.patch(host: 'http://gems.example.com')
+require "geminabox-release"
+GeminaboxRelease.patch(host: "http://gems.example.com")
