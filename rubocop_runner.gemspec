@@ -22,9 +22,9 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "http://gems.example.com"
   end
 
-  spec.add_dependency "rubocop-defaults", "~> 1.0.1"
+  spec.add_dependency "rubocop-defaults", "~> 1.0.2"
 
-  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "geminabox-release"
 
