@@ -6,9 +6,11 @@ Add these lines to your application's Gemfile:
 
 ```ruby
 
-group :development do
-  gem 'rubocop-defaults', require: false
-  gem 'rubocop_runner', '~> 1.3', require: false
+source "http://gems.example.com" do
+  group :development do
+    gem 'rubocop-defaults', require: false
+    gem 'rubocop_runner', '~> 2.0', require: false
+  end
 end
 ```
 
