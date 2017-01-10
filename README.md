@@ -24,11 +24,15 @@ And then execute:
 
 ## Usage
 
-Here is how to easily run rubocop through a pre-commit hook:
+To create a rubocop runner pre-commit hook once just run
 
-Create a rake task (or Copy the included pre-commit hook in the correct folder (.git/hooks/) ).
+```sh
+ruby -rrubocop_runner -e "RubocopRunner.install"
+```
 
-``` ruby
+To make it easy for every developer on the project you can also add the following rake task
+
+```ruby
 begin
   require 'rubocop/rake_task'
   RuboCop::RakeTask.new
