@@ -1,10 +1,12 @@
 # RubocopRunner
 
-This gem provides means of running rubocop including auto-correct on all files which are currently staged
-in git. This can be easily used as pre-commit hook with the included template.
+This gem provides means of running rubocop including auto-correct on all files
+which are currently staged in git. This can be easily used as pre-commit hook
+with the included template.
 
-If rubocop can fix all detected issues itself via autocorrect it will add all new changes
-(to files already staged) automatically to the new commit. Otherwise it will let the commit fail.
+If rubocop can fix all detected issues itself via autocorrect it will will do
+so. The commit will abort in this situation.
+In case rubocop accepts all code changes the commit continues.
 
 _Although this gem has no tests it's pretty battle tested and is in use internally since years._
 
@@ -63,7 +65,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/runtastic/rubocop_runner.
-
 
 ## License
 
