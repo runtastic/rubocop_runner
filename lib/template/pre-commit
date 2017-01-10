@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 begin
-  require "bundler/setup"
-  require "rubocop_runner"
+  require 'bundler/setup'
+  require 'rubocop_runner'
 rescue LoadError
   puts "can't find rubocop in current bundle"
   exit 1

@@ -1,6 +1,5 @@
-require:
-  - rubocop-defaults
-
 Style/FileName:
   Exclude:
     - 'lib/template/pre-commit'
+Style/Documentation:
+  Enabled: false
