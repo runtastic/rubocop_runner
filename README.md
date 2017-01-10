@@ -1,5 +1,7 @@
 # RubocopRunner
 
+[![Gem Version](https://badge.fury.io/rb/rubocop_runner.svg)](https://badge.fury.io/rb/rubocop_runner)
+
 This gem provides means of running rubocop including auto-correct on all files
 which are currently staged in git. This can be easily used as pre-commit hook
 with the included template.
@@ -8,7 +10,7 @@ If rubocop can fix all detected issues itself via autocorrect it will will do
 so. The commit will abort in this situation.
 In case rubocop accepts all code changes the commit continues.
 
-_Although this gem has no tests it's pretty battle tested and is in use internally since years._
+_Although this gem has no tests it's pretty battle tested and is in use at runtastic since years._
 
 ## Installation
 
