@@ -34,27 +34,19 @@ To create a rubocop runner pre-commit hook once just run
 ruby -rrubocop_runner -e "RubocopRunner.install"
 ```
 
-To make it easy for every developer on the project you can also add the following rake task
+To make it easy for every developer on the project you can also add this to your
+`Rakefile`:
 
 ```ruby
-begin
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
-  namespace :rubocop do
-    desc 'Install Rubocop as pre-commit hook'
-    task :install do
-      require 'rubocop_runner'
-      RubocopRunner.install
-    end
-  end
-rescue LoadError
-  p 'rubocop not installed'
-end
+require 'rubocop_runner/rake_task'
+RubocopRunner::RakeTask.new
 ```
+
+Afterwards, just run the `rake rubocop:install` task to install the pre-commit
+hook.
 
 ## ToDo
 
-- add the install rake task itself to the gem
 - add tests
 - improve gem structure
 
