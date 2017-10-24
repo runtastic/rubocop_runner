@@ -90,5 +90,6 @@ module RubocopRunner
                                                        'pre-commit')
     FileUtils.cp(pre_commit_template_path, pre_commit_path)
     FileUtils.chmod('+x', pre_commit_path)
+    puts 'RubocopRunner installed!'
   end
 end
