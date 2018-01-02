@@ -1,0 +1,17 @@
+Changelog
+===
+
+
+master
+---
+
+
+2.1.0
+---
+
+- package rake task within gem [#2](https://github.com/runtastic/rubocop_runner/pull/2)
+
+2.0.1
+---
+
+- initial open source release
