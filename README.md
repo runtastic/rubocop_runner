@@ -13,6 +13,8 @@ since years._
 
 ## Installation
 
+Add these lines to your application's Gemfile:
+
 ```ruby
 gem 'rubocop_runner', '~> 2.1', require: false
 ```
