@@ -42,7 +42,7 @@ module RubocopRunner
     end
   end
 
-  RUBY_PATTERN = /\.(rb|gemspec)$/
+  RUBY_PATTERN = /\.(rb|gemspec|rake)$/
   RUBY_NAMES = %w(Guardfile Gemfile Rakefile config.ru).freeze
 
   def ruby_file?(filename)
