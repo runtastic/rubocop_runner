@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubocop_runner/version'
 require 'rubocop'
 
@@ -7,6 +9,7 @@ module RubocopRunner
   # from https://github.com/djberg96/ptools/blob/master/lib/ptools.rb#L90
   def binary?(file)
     return true if File.ftype(file) != 'file'
+
     s = (File.read(file, File.stat(file).blksize) || '').split(//)
     ((s.size - s.grep(' '..'~').size) / s.size.to_f) > 0.30
   end
@@ -42,8 +45,8 @@ module RubocopRunner
     end
   end
 
-  RUBY_PATTERN = /\.(rb|gemspec|rake)$/
-  RUBY_NAMES = %w(Guardfile Gemfile Rakefile config.ru).freeze
+  RUBY_PATTERN = /\.(rb|gemspec|rake)$/.freeze
+  RUBY_NAMES = %w[Guardfile Gemfile Rakefile config.ru].freeze
 
   def ruby_file?(filename)
     RUBY_NAMES.include?(filename) || !(filename =~ RUBY_PATTERN).nil?
@@ -55,12 +58,13 @@ module RubocopRunner
     end
   end
 
-  DEFAULT_ARGS = %w(--auto-correct
+  DEFAULT_ARGS = %w[--auto-correct
                     --format fuubar
                     --force-exclusion
-                    --fail-level autocorrect).freeze
+                    --fail-level autocorrect].freeze
   def run
     return 0 if staged_ruby_files.empty?
+
     ::RuboCop::CLI.new.run(DEFAULT_ARGS + staged_ruby_files)
   end
 
@@ -73,6 +77,7 @@ module RubocopRunner
 
   def create_backup(pre_commit_path)
     return unless File.exist?(pre_commit_path)
+
     FileUtils.mv(pre_commit_path,
                  pre_commit_path.join('.bkp'),
                  force: true)
@@ -82,6 +87,7 @@ module RubocopRunner
     require 'fileutils'
     git_root = Pathname.new "#{root}/.git"
     return false unless File.exist?(git_root)
+
     pre_commit_path = git_root.join('hooks', 'pre-commit')
     create_backup(pre_commit_path)
 

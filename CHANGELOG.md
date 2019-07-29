@@ -5,6 +5,11 @@ Changelog
 master
 ---
 
+2.2.0
+---
+
+- also inspect `.rake` files
+- readme format changes
 
 2.1.0
 ---
