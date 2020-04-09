@@ -61,6 +61,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/runtas
 This project is intended to be a safe, welcoming space for collaboration, and
 contributors are expected to adhere to the [code of conduct][cc].
 
+Check out our [career page](https://github.com/runtastic/request_handler) if you'd like to work with us.
+
 ## License
 The gem is available as open source under [the terms of the MIT License][mit].
 
