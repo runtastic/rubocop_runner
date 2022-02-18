@@ -32,7 +32,7 @@ Or install it yourself as:
 To create a rubocop runner pre-commit hook once just run
 
 ```sh
-ruby -rrubocop_runner -e "RubocopRunner.install"
+ruby -rubocop_runner -e "RubocopRunner.install"
 ```
 
 To make it easy for every developer on the project you can also add this to your
@@ -57,6 +57,7 @@ release a new version, update the version number in `version.rb`, and then run
 git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
+
 Bug reports and pull requests are welcome on GitHub at https://github.com/runtastic/rubocop_runner.
 This project is intended to be a safe, welcoming space for collaboration, and
 contributors are expected to adhere to the [code of conduct][cc].
@@ -64,6 +65,7 @@ contributors are expected to adhere to the [code of conduct][cc].
 Check out our [career page](https://www.runtastic.com/career/) if you'd like to work with us.
 
 ## License
+
 The gem is available as open source under [the terms of the MIT License][mit].
 
 [rubygems]: https://rubygems.org/gems/rubocop_runner
