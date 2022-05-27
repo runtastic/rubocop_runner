@@ -58,7 +58,7 @@ module RubocopRunner
     end
   end
 
-  DEFAULT_ARGS = %w[--auto-correct
+  DEFAULT_ARGS = %w[--autocorrect
                     --format fuubar
                     --force-exclusion
                     --fail-level autocorrect].freeze

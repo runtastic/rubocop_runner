@@ -1,6 +1,10 @@
 Changelog
 ===
 
+2.2.1
+---
+
+- Update `DEFAULT_ARGS` to use `autocorrect` instead of `auto-correct` matching the naming of the argument in the current version of rubocop (as of 1.30.0).
 
 master
 ---
