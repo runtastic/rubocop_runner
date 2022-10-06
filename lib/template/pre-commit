@@ -1,12 +1,21 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
-begin
-  require 'bundler/setup'
-  require 'rubocop_runner'
-rescue LoadError
-  puts "can't find rubocop in current bundle"
-  exit 1
+ADDED_OR_MODIFIED = /A|AM|^M/.freeze
+FILE_EXTENSIONS = %w[.rb .ru].freeze
+FILES = %w[Guardfile Gemfile Rakefile]
+
+changed_files = `git status --porcelain`.split(/\n/).
+    select { |file_name_with_status|
+      file_name_with_status =~ ADDED_OR_MODIFIED
+    }.
+    map { |file_name_with_status|
+      file_name_with_status.split(' ')[1]
+    }.
+    select { |file_name|
+      FILE_EXTENSIONS.include?(File.extname(file_name)) ||
+        FILES.include?(file_name)
+    }.join(' ')
+
+unless changed_files.empty?
+  exit! system("bundle exec rubocop --fail-level A -a #{changed_files}")
 end
-
-exit RubocopRunner.run
